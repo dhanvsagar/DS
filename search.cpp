@@ -4,6 +4,7 @@ using namespace std;
 
 int UnOrderedLinearSearch(int A[], int n, int data);
 int OrderedBinarySearchRecursive(int A[], int low, int high, int data);
+int OrderedBinarySearchIterative(int A[], int n, int data);
 void printArray(int A[], int n);
 
 int main()
@@ -21,7 +22,8 @@ int main()
   }
 
   //pos = UnOrderedLinearSearch(A,n,data);
-  pos = OrderedBinarySearchRecursive(A, 0, n, data);
+  //pos = OrderedBinarySearchRecursive(A, 0, n, data);
+  pos = OrderedBinarySearchIterative(A, n, data);
   cout << "\n" << data <<" Found at position " << pos <<endl;
 
   //printArray(A, n);
@@ -61,5 +63,23 @@ int OrderedBinarySearchRecursive(int A[], int low, int high, int data)
     return OrderedBinarySearchRecursive(A, 0, mid-1, data);
   else
     return OrderedBinarySearchRecursive(A, mid+1 , high, data);
+  return -1;
+}
+
+int OrderedBinarySearchIterative(int A[], int high, int data)
+{
+  int low = 0, mid = 0;
+
+  while(low <= high)
+  {
+    mid = (low + high) / 2;
+    if (A[mid] == data)
+      return mid;
+    else if (A[mid] > data)
+      high = mid - 1;
+    else
+      low = mid + 1;
+    return -1;
+  }
   return -1;
 }
